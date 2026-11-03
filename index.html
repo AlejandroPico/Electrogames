@@ -3,12 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        background: var(--bg, #f2f3f5);
+      }
+      :root[data-theme="night"] {
+        --bg: #151a23;
+      }
+      :root[data-theme="afternoon"] {
+        --bg: #eadfd0;
+      }
+    </style>
+    <script>
+      try {
+        let theme = localStorage.getItem("electrogames:v1:theme") || "day";
+        if (theme === "auto") {
+          const hour = new Date().getHours();
+          theme =
+            hour < 7 || hour >= 21 ? "night" : hour >= 18 ? "afternoon" : "day";
+        }
+        document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
     <meta name="theme-color" content="#f2f3f5" />
     <meta
       name="description"
-      content="Colección de doce juegos electrónicos clásicos para navegador."
+      content="Juegos electrónicos clásicos, arcades y recreaciones de Alejandro Pico para navegador."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>ElectroGames</title>
   </head>
   <body>

@@ -13,8 +13,9 @@ export default function Game() {
       title="Pinball"
       create={create}
       buttons={buttons}
+      dimensions={{ width: 500, height: 750 }}
       hint="Z / ← palanca izquierda · X / → derecha · Espacio lanzar · P pausa"
-      instructions="Lanza la bola con Espacio. Activa la palanca izquierda con Z o flecha izquierda y la derecha con X o flecha derecha. Evita que la bola salga por el hueco central. Los tres bumpers conceden 100 puntos por impacto. Tienes tres bolas; después de perder una, vuelve a lanzar. Las palancas activas impulsan la bola hacia arriba. Mesa original con gravedad, rebotes y colisiones resueltas en varios pasos por fotograma."
+      instructions="Lanza con Espacio desde el carril derecho. Z o flecha izquierda activa la palanca izquierda; X o flecha derecha, la derecha. Tienes tres bolas. Los bumpers dan 100 puntos y el obstáculo central, 25, multiplicados por el nivel de bonus. Enciende las cuatro dianas laterales para conseguir 500 puntos y subir el multiplicador hasta ×5. Evita el desagüe central. La puerta del carril se cierra después del lanzamiento para devolver la bola al campo de juego."
     />
   );
 }

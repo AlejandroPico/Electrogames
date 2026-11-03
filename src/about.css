@@ -1,0 +1,162 @@
+.about-dialog {
+  width: min(700px, calc(100vw - 28px));
+  max-height: calc(100dvh - 32px);
+}
+.about-dialog .modal-content {
+  padding: 26px 32px;
+}
+.about-identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 12px 0 24px;
+}
+.about-identity img {
+  width: 86px;
+  height: 86px;
+  flex-shrink: 0;
+}
+.about-identity h3 {
+  font-size: 36px;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  margin: 0 0 9px;
+  font-weight: 650;
+}
+.version-tag {
+  display: inline-block;
+  font:
+    11px ui-monospace,
+    monospace;
+  border: 1px solid var(--line);
+  padding: 4px 7px;
+  color: var(--accent);
+  background: var(--soft);
+}
+.about-identity p {
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+.about-dialog .about-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 22px;
+}
+.about-statline {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 1fr;
+  gap: 16px;
+  border-block: 1px solid var(--line);
+  padding: 18px 0;
+  margin-bottom: 16px;
+}
+.about-statline > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.about-statline svg {
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.about-statline strong {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+}
+.about-statline span {
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.about-link-list {
+  display: grid;
+  margin-bottom: 20px;
+}
+.about-link-list a {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.about-link-list a:hover {
+  color: var(--accent);
+}
+.about-link-list a > span {
+  flex: 1;
+}
+.about-link-list small {
+  display: block;
+  font-size: 11px;
+  margin-top: 5px;
+  color: var(--muted);
+}
+.install-button {
+  width: 100%;
+  min-height: 46px;
+}
+.about-credit {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 10px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: 22px;
+}
+.install-state {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--accent);
+  padding: 12px;
+  background: var(--soft);
+}
+.install-instructions {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  margin-top: 12px;
+  background: var(--bg);
+}
+.about-dialog .install-instructions p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+@media (max-width: 550px) {
+  .about-dialog .modal-content {
+    padding: 20px;
+  }
+  .about-identity {
+    gap: 15px;
+    margin: 12px 0 20px;
+  }
+  .about-identity img {
+    width: 64px;
+    height: 64px;
+  }
+  .about-identity h3 {
+    font-size: 28px;
+  }
+  .about-statline {
+    gap: 12px;
+    grid-template-columns: 0.6fr 1fr 1fr;
+  }
+  .about-statline strong {
+    font-size: 16px;
+  }
+  .about-statline span {
+    font-size: 9px;
+  }
+  .about-credit {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .about-dialog .about-intro {
+    font-size: 13px;
+  }
+}

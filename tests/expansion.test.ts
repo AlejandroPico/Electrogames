@@ -168,7 +168,7 @@ describe("Pinball", () => {
   it("bumper collisions award points and push the ball away", () => {
     const e = new PinballEngine();
     e.waiting = false;
-    e.ball = { x: 295, y: 170, vx: -10, vy: 0 };
+    e.ball = { x: 195, y: 180, vx: -10, vy: 0 };
     e.update(0.001, input());
     expect(e.score).toBe(100);
     expect(e.ball.vx).toBeGreaterThan(0);
@@ -191,11 +191,38 @@ describe("Pinball", () => {
     const e = new PinballEngine();
     for (let n = 0; n < 3; n++) {
       e.waiting = false;
-      e.ball = { x: 400, y: 630, vx: 0, vy: 0 };
+      e.ball = { x: 250, y: 740, vx: 0, vy: 0 };
       e.update(0.01, input());
     }
     expect(e.balls).toBe(0);
     expect(e.over).toBe(true);
+  });
+  it("launches from inside the visible lane and enters the field without losing a ball", () => {
+    const e = new PinballEngine();
+    expect(e.ball.x).toBeGreaterThan(438);
+    expect(e.ball.x).toBeLessThan(470);
+    e.update(0.01, input(" "));
+    let entered = false;
+    for (let n = 0; n < 180; n++) {
+      e.update(1 / 120, input());
+      entered ||= !e.inLane;
+      expect(e.ball.x).toBeGreaterThanOrEqual(40);
+      expect(e.ball.x).toBeLessThanOrEqual(470);
+      expect(e.ball.y).toBeLessThan(750);
+    }
+    expect(entered).toBe(true);
+    expect(e.balls).toBe(3);
+  });
+  it("lights targets and increases the multiplier after completing a bank", () => {
+    const e = new PinballEngine();
+    e.waiting = false;
+    e.inLane = false;
+    e.targets = [true, true, true, false];
+    e.ball = { x: 406, y: 368, vx: 150, vy: 0 };
+    e.update(0.001, input());
+    expect(e.multiplier).toBe(2);
+    expect(e.targets.every((v) => !v)).toBe(true);
+    expect(e.score).toBeGreaterThanOrEqual(700);
   });
 });
 describe("Cruzar la carretera", () => {

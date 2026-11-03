@@ -8,5 +8,7 @@
 - Ofrecer teclado, controles táctiles, instrucciones, pausa y reinicio cuando corresponda. Los arcades se detienen al perder el foco.
 - No marcar como jugable un juego pendiente. Las ideas viven en `docs/ROADMAP.md`.
 - Ejecutar `npm test` y `npm run build` antes de subir cambios. Conservar `package-lock.json`; Actions utiliza `npm ci`.
+- Ejecutar también `npm run check:pwa` tras compilar. Aislar ámbito y caché de la PWA bajo `/Electrogames/` y el prefijo `electrogames-offline-`; no alterar los datos de Games u otros proyectos del mismo dominio.
+- Acerca de toma la versión de `package.json`, presenta el favicon raíz, el portfolio, el repositorio y el estado real de instalación. Mantener el fondo de html, body, raíz y contenido ligado al tema, incluso con catálogos filtrados cortos.
 - Documentar reglas, límites y arquitectura en README.md. No añadir secretos ni simular servicios persistentes en el cliente.
 - No añadir emuladores ni ROM: pertenecen al futuro Videogames.

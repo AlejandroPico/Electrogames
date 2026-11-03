@@ -1,6 +1,6 @@
 # Siguientes juegos propuestos
 
-Estas propuestas no están disponibles en el catálogo. Los ocho juegos de la ampliación anterior ya son jugables.
+Estas propuestas no están disponibles en el catálogo. La colección actual reúne 27 juegos; la última ampliación incorporó los quince propuestos en la conversación y una mesa de Pinball corregida.
 
 - **Carreras de luz:** dejar un rastro y evitar chocar con las paredes y los rivales.
 - **Artillería:** calcular ángulo y potencia con viento y terreno destructible.
@@ -22,7 +22,7 @@ Estas propuestas no están disponibles en el catálogo. Los ocho juegos de la am
 - Efectos de sonido propios, volumen y silencio.
 - Dificultad de los arcades conservada al reiniciar.
 - Pong para dos personas en el mismo dispositivo.
-- Instalación PWA y precarga para jugar sin conexión.
+- Mejorar la gestión visible de nuevas versiones de la PWA ya instalable.
 - Mando físico y pantalla completa con salida visible.
 - Pruebas en teléfonos físicos y con tecnologías de apoyo.
 

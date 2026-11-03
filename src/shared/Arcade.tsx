@@ -25,6 +25,8 @@ export type ArcadeProps = {
   controls?: "arrows" | "paddle" | "vertical";
   buttons?: { key: string; label: string }[];
   dimensions?: { width: number; height: number };
+  pointerAction?: string;
+  pointerHold?: string;
 };
 export default function Arcade({
   id,
@@ -35,21 +37,29 @@ export default function Arcade({
   controls = "paddle",
   buttons,
   dimensions,
+  pointerAction,
+  pointerHold,
 }: ArcadeProps) {
   const canvasWidth = dimensions?.width ?? 800,
     canvasHeight = dimensions?.height ?? 600;
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<Engine | null>(null),
     input = useRef<Input>({ keys: new Set(), pointer: null, pressed: [] });
-  const [phase, setPhase] = useState<"ready" | "playing" | "paused" | "over">(
-      "ready",
-    ),
+  const [phase, commitPhase] = useState<
+      "ready" | "playing" | "paused" | "over"
+    >("ready"),
     [score, setScore] = useState(0),
     [best, setBest] = useState(() => Number(read(`best:${id}`, "0")) || 0),
     [help, setHelp] = useState(false),
     [status, setStatus] = useState("");
   const phaseRef = useRef(phase);
-  phaseRef.current = phase;
+  function setPhase(
+    next: typeof phase | ((current: typeof phase) => typeof phase),
+  ) {
+    const value = typeof next === "function" ? next(phaseRef.current) : next;
+    phaseRef.current = value;
+    commitPhase(value);
+  }
   function restart() {
     engine.current = create();
     input.current.keys.clear();
@@ -241,6 +251,17 @@ export default function Arcade({
                 ((e.clientY - e.currentTarget.getBoundingClientRect().top) /
                   e.currentTarget.getBoundingClientRect().height) *
                 canvasHeight;
+              if (phaseRef.current === "playing") {
+                if (pointerAction && input.current.pressed!.length < 12)
+                  input.current.pressed!.push(pointerAction);
+                if (pointerHold) input.current.keys.add(pointerHold);
+              }
+            }}
+            onPointerUp={() => {
+              if (pointerHold) input.current.keys.delete(pointerHold);
+            }}
+            onPointerCancel={() => {
+              if (pointerHold) input.current.keys.delete(pointerHold);
             }}
           />
           {phase !== "playing" && (

@@ -20,7 +20,7 @@ import {
   Github,
 } from "lucide-react";
 import { games, categories, filterGames } from "./catalog";
-import Modal from "./shared/Modal";
+import About, { useInstallation } from "./shared/About";
 import { read, write } from "./shared/storage";
 class Boundary extends Component<{ children: ReactNode }, { error: boolean }> {
   state = { error: false };
@@ -46,6 +46,7 @@ function getRoute() {
   }
 }
 export default function App() {
+  const installation = useInstallation();
   const [route, setRoute] = useState(getRoute),
     [query, setQuery] = useState(""),
     [selected, setSelected] = useState<string[]>([]),
@@ -80,6 +81,14 @@ export default function App() {
               ? "afternoon"
               : "day"
           : theme;
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute(
+          "content",
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--bg")
+            .trim(),
+        );
     }
     update();
     write("theme", theme);
@@ -318,34 +327,7 @@ export default function App() {
         )}
       </main>
       {about && (
-        <Modal title="Acerca de ElectroGames" close={() => setAbout(false)}>
-          <p>
-            Juegos electrónicos clásicos para navegador. La colección contiene{" "}
-            {games.length} juegos con teclado y controles táctiles.
-          </p>
-          <p>
-            Los récords se guardan en este navegador. Cada juego incluye sus
-            instrucciones. Las versiones utilizan programación e ilustraciones
-            propias.
-          </p>
-          <div className="about-links">
-            <a
-              href="https://alejandropico.github.io/Games/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Games <ArrowUpRight size={16} />
-            </a>
-            <a
-              href="https://github.com/AlejandroPico/Electrogames"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github size={16} />
-              Repositorio
-            </a>
-          </div>
-        </Modal>
+        <About close={() => setAbout(false)} installation={installation} />
       )}
     </>
   );
