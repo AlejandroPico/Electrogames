@@ -1,31 +1,29 @@
-# Próximas partidas
+# Siguientes juegos propuestos
 
-Propuestas, no juegos disponibles. La primera edición contiene Snake, Pong, Breakout y Buscaminas.
+Estas propuestas no están disponibles en el catálogo. Los ocho juegos de la ampliación anterior ya son jugables.
 
-## Siguiente tanda sugerida
+- **Carreras de luz:** dejar un rastro y evitar chocar con las paredes y los rivales.
+- **Artillería:** calcular ángulo y potencia con viento y terreno destructible.
+- **Rescate en helicóptero:** recoger personas, gestionar combustible y aterrizar.
+- **Defensa de misiles:** interceptar proyectiles para proteger varias bases.
+- **Excavador:** recorrer galerías y capturar enemigos en escenarios originales.
+- **Escaleras y plataformas:** saltos, ascenso y obstáculos en una estructura vertical.
+- **Carreras cenitales:** circuitos cortos, derrapes y vueltas contra reloj.
+- **Rally de carretera:** esquivar tráfico en una carretera con desplazamiento vertical.
+- **Qix / conquista de territorio:** dibujar áreas mientras se evitan enemigos.
+- **Escalada de torre:** saltar entre plataformas móviles con dificultad progresiva.
+- **Billar:** empezar con práctica de carambolas y apuntado; después añadir modalidades completas.
+- **Hockey de aire:** disco, rebotes y dos palas con control directo.
+- **Bolos:** dirección, fuerza y derribo de diez bolos.
+- **Rebote vertical:** subir una pelota entre plataformas, con recorrido original.
 
-1. **Asteroides:** nave con giro e inercia, disparos, rocas que se fragmentan y oleadas. Arte vectorial propio; giro, impulso y disparo también en móvil.
-2. **Matamarcianos:** formación de enemigos, escudos destructibles, disparo y velocidad creciente. Control horizontal familiar tras Breakout.
-3. **Laberinto de puntos:** recorrido original inspirado en los juegos de persecución, enemigos con comportamientos distintos y potenciadores. Personajes, mapas y sonidos propios.
-4. **Pinball:** mesa original con dos palancas, lanzador, bumpers, objetivos y tres bolas. Necesita una fase específica de física y ajuste de los rebotes.
+## Plataforma
 
-## Más clásicos que encajan
-
-- **Bloques descendentes:** rotación, caída, líneas y niveles con piezas y presentación propias.
-- **Cruzar la carretera:** tráfico, río y plataformas móviles con recorridos y personajes originales.
-- **Carreras de luz:** supervivencia dejando un rastro; dos personas en el mismo teclado como modalidad posterior.
-- **Aterrizaje lunar:** gravedad, combustible, empuje y alunizaje suave.
-- **Artillería:** ángulo, fuerza, viento y terreno destructible.
-- **Tanques:** laberintos, proyectiles y coberturas con escenarios pequeños.
-- **Billar:** empezar por práctica de carambolas; resolver colisiones, fricción y apuntado antes de anunciar modalidades completas.
-
-## Evolución de la plataforma
-
-- Efectos de sonido propios con volumen y silencio.
+- Efectos de sonido propios, volumen y silencio.
 - Dificultad de los arcades conservada al reiniciar.
-- Pong para dos personas en un mismo dispositivo.
+- Pong para dos personas en el mismo dispositivo.
 - Instalación PWA y precarga para jugar sin conexión.
 - Mando físico y pantalla completa con salida visible.
-- Pruebas en teléfonos físicos y orientación horizontal.
+- Pruebas en teléfonos físicos y con tecnologías de apoyo.
 
-Prioridad: pocos juegos completos con buena respuesta de control, ilustración, ayuda, pruebas y carpeta independiente. Videogames continuará como proyecto separado para emulación.
+Cada alta necesita motor propio, controles de teclado y táctiles, arte reconocible, ayuda y pruebas. Videogames seguirá siendo el proyecto separado para emulación.

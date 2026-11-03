@@ -3,14 +3,20 @@ import SnakeArt from "../ElectroGames/snake/Art";
 import PongArt from "../ElectroGames/pong/Art";
 import BreakoutArt from "../ElectroGames/breakout/Art";
 import MinesArt from "../ElectroGames/minesweeper/Art";
+import AsteroidsArt from "../ElectroGames/asteroids/Art";
+import InvadersArt from "../ElectroGames/invaders/Art";
+import PacmanArt from "../ElectroGames/pacman/Art";
+import PinballArt from "../ElectroGames/pinball/Art";
+import RoadArt from "../ElectroGames/road-crossing/Art";
+import BlocksArt from "../ElectroGames/falling-blocks/Art";
+import TanksArt from "../ElectroGames/tanks/Art";
+import LunarArt from "../ElectroGames/lunar-lander/Art";
 export const games = [
   {
     id: "snake",
     name: "Snake",
     category: "Supervivencia",
     players: "1 jugador",
-    description: "Un fruto más. Un giro más. Un poco menos de espacio.",
-    year: "Clásico de los móviles",
     Art: SnakeArt,
     Game: lazy(() => import("../ElectroGames/snake/Game")),
   },
@@ -19,8 +25,6 @@ export const games = [
     name: "Pong",
     category: "Reflejos",
     players: "1 jugador · CPU",
-    description: "Dos palas, una pelota y toda la esencia del arcade.",
-    year: "El origen del arcade",
     Art: PongArt,
     Game: lazy(() => import("../ElectroGames/pong/Game")),
   },
@@ -29,8 +33,6 @@ export const games = [
     name: "Breakout",
     category: "Reflejos",
     players: "1 jugador",
-    description: "Encuentra el ángulo. Rompe el siguiente bloque.",
-    year: "La fiebre de los bloques",
     Art: BreakoutArt,
     Game: lazy(() => import("../ElectroGames/breakout/Game")),
   },
@@ -39,9 +41,88 @@ export const games = [
     name: "Buscaminas",
     category: "Lógica",
     players: "1 jugador",
-    description: "Cada número es una pista. Cada casilla, una decisión.",
-    year: "Un icono del escritorio",
     Art: MinesArt,
     Game: lazy(() => import("../ElectroGames/minesweeper/Game")),
   },
+  {
+    id: "asteroids",
+    name: "Asteroides",
+    category: "Disparos",
+    players: "1 jugador",
+    Art: AsteroidsArt,
+    Game: lazy(() => import("../ElectroGames/asteroids/Game")),
+  },
+  {
+    id: "invaders",
+    name: "Matamarcianos",
+    category: "Disparos",
+    players: "1 jugador",
+    Art: InvadersArt,
+    Game: lazy(() => import("../ElectroGames/invaders/Game")),
+  },
+  {
+    id: "pacman",
+    name: "Pac-Man",
+    category: "Laberintos",
+    players: "1 jugador",
+    Art: PacmanArt,
+    Game: lazy(() => import("../ElectroGames/pacman/Game")),
+  },
+  {
+    id: "pinball",
+    name: "Pinball",
+    category: "Reflejos",
+    players: "1 jugador",
+    Art: PinballArt,
+    Game: lazy(() => import("../ElectroGames/pinball/Game")),
+  },
+  {
+    id: "road-crossing",
+    name: "Cruzar la carretera",
+    category: "Supervivencia",
+    players: "1 jugador",
+    Art: RoadArt,
+    Game: lazy(() => import("../ElectroGames/road-crossing/Game")),
+  },
+  {
+    id: "falling-blocks",
+    name: "Bloques descendentes",
+    category: "Lógica",
+    players: "1 jugador",
+    Art: BlocksArt,
+    Game: lazy(() => import("../ElectroGames/falling-blocks/Game")),
+  },
+  {
+    id: "tanks",
+    name: "Tanques",
+    category: "Disparos",
+    players: "1 jugador",
+    Art: TanksArt,
+    Game: lazy(() => import("../ElectroGames/tanks/Game")),
+  },
+  {
+    id: "lunar-lander",
+    name: "Aterrizaje lunar",
+    category: "Simulación",
+    players: "1 jugador",
+    Art: LunarArt,
+    Game: lazy(() => import("../ElectroGames/lunar-lander/Game")),
+  },
 ];
+export const categories = [...new Set(games.map((g) => g.category))];
+const normalize = (s: string) =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+export function filterGames<T extends { name: string; category: string }>(
+  items: T[],
+  selected: string[],
+  query: string,
+) {
+  return items.filter(
+    (g) =>
+      (!selected.length || selected.includes(g.category)) &&
+      normalize(`${g.name} ${g.category}`).includes(normalize(query)),
+  );
+}

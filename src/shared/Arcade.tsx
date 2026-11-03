@@ -23,6 +23,8 @@ export type ArcadeProps = {
   hint: string;
   create: () => Engine;
   controls?: "arrows" | "paddle" | "vertical";
+  buttons?: { key: string; label: string }[];
+  dimensions?: { width: number; height: number };
 };
 export default function Arcade({
   id,
@@ -31,7 +33,11 @@ export default function Arcade({
   hint,
   create,
   controls = "paddle",
+  buttons,
+  dimensions,
 }: ArcadeProps) {
+  const canvasWidth = dimensions?.width ?? 800,
+    canvasHeight = dimensions?.height ?? 600;
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<Engine | null>(null),
     input = useRef<Input>({ keys: new Set(), pointer: null, pressed: [] });
@@ -98,6 +104,12 @@ export default function Arcade({
       "S",
       "D",
       " ",
+      "p",
+      "P",
+      "z",
+      "Z",
+      "x",
+      "X",
     ];
     const down = (e: KeyboardEvent) => {
       if (
@@ -107,16 +119,26 @@ export default function Arcade({
       )
         return;
       if (allowed.includes(e.key)) {
-        if (e.key === " " && e.target instanceof HTMLButtonElement) return;
+        if (
+          e.key === " " &&
+          e.target instanceof HTMLButtonElement &&
+          !buttons?.some((b) => b.key === " ")
+        )
+          return;
         e.preventDefault();
-        if (e.key === " ") {
+        if (
+          e.key.toLowerCase() === "p" ||
+          (e.key === " " &&
+            (!buttons?.some((b) => b.key === " ") ||
+              phaseRef.current !== "playing"))
+        ) {
           if (!e.repeat) toggle();
         } else {
           const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
           input.current.pointer = null;
           input.current.pointerY = null;
           input.current.keys.add(key);
-          if (!e.repeat && input.current.pressed!.length < 2)
+          if (!e.repeat && input.current.pressed!.length < 12)
             input.current.pressed!.push(key);
         }
       }
@@ -142,7 +164,7 @@ export default function Arcade({
       window.removeEventListener("electrogames:pause", blur);
       document.removeEventListener("visibilitychange", blur);
     };
-  }, [help]);
+  }, [help, buttons]);
   function pad(key: string, label: string) {
     return (
       <button
@@ -153,7 +175,7 @@ export default function Arcade({
           input.current.keys.add(key);
           input.current.pointer = null;
           input.current.pointerY = null;
-          if (input.current.pressed!.length < 2)
+          if (input.current.pressed!.length < 12)
             input.current.pressed!.push(key);
         }}
         onPointerUp={() => input.current.keys.delete(key)}
@@ -181,10 +203,20 @@ export default function Arcade({
         </span>
       </div>
       <div className="arena">
-        <div className="canvas-wrap">
+        <div
+          className="canvas-wrap"
+          style={
+            dimensions
+              ? {
+                  aspectRatio: `${canvasWidth}/${canvasHeight}`,
+                  width: `min(100cqw, ${(canvasWidth / canvasHeight) * 100}cqh, ${canvasWidth * 1.25}px)`,
+                }
+              : undefined
+          }
+        >
           <canvas
-            width={800}
-            height={600}
+            width={canvasWidth}
+            height={canvasHeight}
             ref={canvas}
             aria-label={`${title}: ${hint}`}
             onPointerMove={(e) => {
@@ -192,11 +224,11 @@ export default function Arcade({
                 input.current.pointer =
                   ((e.clientX - e.currentTarget.getBoundingClientRect().left) /
                     e.currentTarget.getBoundingClientRect().width) *
-                  800;
+                  canvasWidth;
                 input.current.pointerY =
                   ((e.clientY - e.currentTarget.getBoundingClientRect().top) /
                     e.currentTarget.getBoundingClientRect().height) *
-                  600;
+                  canvasHeight;
               }
             }}
             onPointerDown={(e) => {
@@ -204,37 +236,30 @@ export default function Arcade({
               input.current.pointer =
                 ((e.clientX - e.currentTarget.getBoundingClientRect().left) /
                   e.currentTarget.getBoundingClientRect().width) *
-                800;
+                canvasWidth;
               input.current.pointerY =
                 ((e.clientY - e.currentTarget.getBoundingClientRect().top) /
                   e.currentTarget.getBoundingClientRect().height) *
-                600;
+                canvasHeight;
             }}
           />
           {phase !== "playing" && (
             <div className="game-overlay">
-              <span className="eyebrow">
-                {phase === "ready"
-                  ? "¿UNA PARTIDA?"
-                  : phase === "paused"
-                    ? "TÓMATE UN RESPIRO"
-                    : "FIN DE LA PARTIDA"}
-              </span>
               <h2>
                 {phase === "ready"
                   ? title
                   : phase === "paused"
                     ? "En pausa"
                     : engine.current?.won
-                      ? "¡Lo has conseguido!"
-                      : "Una más, ¿verdad?"}
+                      ? "Victoria"
+                      : "Partida terminada"}
               </h2>
               <p>
                 {phase === "ready"
                   ? hint
                   : phase === "over"
-                    ? `${score} puntos · Tu próximo récord te espera.`
-                    : "La partida te espera donde la dejaste."}
+                    ? `${score} puntos`
+                    : hint}
               </p>
               <button
                 className="primary"
@@ -256,8 +281,10 @@ export default function Arcade({
           )}
         </div>
       </div>
-      <div className={`touch-controls ${controls}`}>
-        {controls === "arrows" ? (
+      <div className={`touch-controls ${buttons ? "custom" : controls}`}>
+        {buttons ? (
+          buttons.map((b) => <span key={b.key}>{pad(b.key, b.label)}</span>)
+        ) : controls === "arrows" ? (
           <>
             {pad("ArrowUp", "↑")}
             <div>
@@ -304,8 +331,8 @@ export default function Arcade({
         <Modal title={`Cómo jugar · ${title}`} close={() => setHelp(false)}>
           <p>{instructions}</p>
           <p>
-            Espacio: empezar o pausar. La partida se pausa al cambiar de
-            ventana. Nueva partida conserva el récord.
+            P: pausar o continuar. La partida se pausa al cambiar de ventana.
+            Nueva partida conserva el récord.
           </p>
           <p>Tu récord se guarda solo en este navegador.</p>
         </Modal>

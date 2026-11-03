@@ -99,17 +99,6 @@ export default function Art() {
           </g>
         ))}
       </g>
-      <text
-        x="200"
-        y="364"
-        textAnchor="middle"
-        fill="#7d7460"
-        fontFamily="monospace"
-        fontSize="9"
-        letterSpacing="4"
-      >
-        A LITTLE LOGIC GOES A LONG WAY
-      </text>
     </svg>
   );
 }

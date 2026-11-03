@@ -56,17 +56,6 @@ export default function Art() {
         />
         <path d="M251 184q15-7 17 2-10 7-17-2" fill="#779b70" />
       </g>
-      <text
-        x="200"
-        y="364"
-        textAnchor="middle"
-        fill="#4d6b58"
-        fontFamily="monospace"
-        fontSize="9"
-        letterSpacing="4"
-      >
-        EAT · GROW · REPEAT
-      </text>
     </svg>
   );
 }

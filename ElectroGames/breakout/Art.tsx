@@ -52,17 +52,6 @@ export default function Art() {
         <rect x="148" y="253" width="77" height="8" rx="4" fill="#b9ccd4" />
         <path d="m119 124-7 10m35-15 7 8" stroke="#d6b58a" strokeWidth="2" />
       </g>
-      <text
-        x="200"
-        y="364"
-        textAnchor="middle"
-        fill="#856b63"
-        fontFamily="monospace"
-        fontSize="9"
-        letterSpacing="4"
-      >
-        MAKE EVERY BOUNCE COUNT
-      </text>
     </svg>
   );
 }

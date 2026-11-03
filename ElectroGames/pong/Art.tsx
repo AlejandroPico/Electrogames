@@ -68,17 +68,6 @@ export default function Art() {
         <circle cx="240" cy="137" r="7" fill="#efdab3" />
         <circle cx="164" cy="251" r="2" fill="#c1d7cc" />
       </g>
-      <text
-        x="200"
-        y="364"
-        textAnchor="middle"
-        fill="#55707f"
-        fontFamily="monospace"
-        fontSize="9"
-        letterSpacing="4"
-      >
-        JUST ONE MORE RALLY
-      </text>
     </svg>
   );
 }
